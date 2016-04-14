@@ -1,22 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import ClickName from './app/click'
-//import Counter from './components/Counter'
-import click from './reducer'
+import { Provider } from 'react-redux';
+import ClickDemo from './app/click';
+import click from './reducer';
+// import Todos from './components/todoApp';
+// import todoApp from './reducer/todo';
 
-const store = createStore(click)
-const rootEl = document.getElementById('root')
-
-function render() {
+const store = createStore(click);
+// const storeTodo = createStore(todoApp);
+const myCount = document.getElementById('mycount');
+const myTodo = document.getElementById('mytodo');
+function renderMyClick() {
   ReactDOM.render(
-    <ClickName
+    <ClickDemo
       value = {store.getState()}
       beClicked = { () => store.dispatch({ type : 'beclicked'})}
+      beClickedThird = { () => store.dispatch({ type : 'beclickedthird'})}
+      clearAll = { () => store.dispatch({type : 'clear'}) }
       />,
-    rootEl
+    myCount
   )
-}
-
-render()
-store.subscribe(render)
+};
+// function renderMyTodo() {
+//   ReactDOM.render(
+//     <Provider store={storeTodo}>
+//     <Todos />
+//     </Provider>,
+//     myTodo
+//   )
+// };
+renderMyClick();
+// renderMyTodo();
+store.subscribe(renderMyClick);
