@@ -4,13 +4,15 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import ClickDemo from './app/click';
 import click from './reducer';
-// import Todos from './components/todoApp';
-// import todoApp from './reducer/todo';
+import Todos from './components/TodoApp';
+import todoApp from './reducer/TodoReducer';
 
 const store = createStore(click);
-// const storeTodo = createStore(todoApp);
+const storeTodo = createStore(todoApp);
+
 const myCount = document.getElementById('mycount');
 const myTodo = document.getElementById('mytodo');
+
 function renderMyClick() {
   ReactDOM.render(
     <ClickDemo
@@ -22,14 +24,14 @@ function renderMyClick() {
     myCount
   )
 };
-// function renderMyTodo() {
-//   ReactDOM.render(
-//     <Provider store={storeTodo}>
-//     <Todos />
-//     </Provider>,
-//     myTodo
-//   )
-// };
+function renderMyTodo() {
+  ReactDOM.render(
+    <Provider store={storeTodo}>
+      <Todos />
+    </Provider>,
+    myTodo
+  )
+};
 renderMyClick();
-// renderMyTodo();
+renderMyTodo();
 store.subscribe(renderMyClick);
